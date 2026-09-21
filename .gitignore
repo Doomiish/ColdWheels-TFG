@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Python backend
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+.env
+backend/.env
+backend/instance/
+backend/*.sqlite
+backend/*.sqlite3
+backend/*.db
+.pytest_cache/
