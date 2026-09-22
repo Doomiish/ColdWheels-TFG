@@ -68,3 +68,26 @@ def change_password(identity, data):
     record_information("change_password", "success", "Password changed", user_id=user.id)
     db.session.commit()
     return user
+
+
+def change_email(identity, data):
+    user = get_authenticated_user(identity)
+
+    current_password = _required_text(data, "current_password")
+    new_email = _required_text(data, "new_email").lower()
+
+    if not user.check_password(current_password):
+        record_error("change_email", "Current password did not match", user_id=user.id)
+        raise AuthenticationError("Invalid current password")
+
+    existing_user = User.query.filter_by(email=new_email).first()
+    if existing_user and existing_user.id != user.id:
+        raise ConflictError("email is already registered")
+
+    user.email = new_email
+
+    record_information("change_email", "success", "Email changed", user_id=user.id)
+
+    db.session.commit()
+
+    return user

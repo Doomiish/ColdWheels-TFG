@@ -36,3 +36,10 @@ def me():
 def change_password():
     user = auth_service.change_password(get_jwt_identity(), json_body())
     return jsonify({"user": user_data(user)})
+
+
+@auth_bp.patch("/change-email")
+@jwt_required()
+def change_email():
+    user = auth_service.change_email(get_jwt_identity(), json_body())
+    return jsonify({"user": user_data(user)})
