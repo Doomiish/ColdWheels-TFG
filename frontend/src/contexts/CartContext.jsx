@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import CartContext from './CartContextValue.js';
 
 const CART_KEY = 'coldwheels.cart';
+const MAX_ITEM_QUANTITY = 5;
 
 function readCart() {
   try {
@@ -30,10 +31,10 @@ function CartProvider({ children }) {
     }
     const existing = items.find((item) => item.product_id === product.id);
     const nextQuantity = (existing?.quantity || 0) + quantity;
-    if (nextQuantity > product.stock) {
+    if (nextQuantity > Math.min(product.stock, MAX_ITEM_QUANTITY)) {
       return {
         ok: false,
-        message: `Solo quedan ${product.stock} unidades de ${product.brand} ${product.model}.`,
+        message: `Puedes añadir un máximo de ${MAX_ITEM_QUANTITY} unidades de ${product.brand} ${product.model}.`,
       };
     }
 
@@ -71,10 +72,10 @@ function CartProvider({ children }) {
     const item = items.find((entry) => entry.product_id === productId);
     if (!item)
       return { ok: false, message: 'El producto ya no está en el carrito.' };
-    if (quantity > item.stock) {
+    if (quantity > Math.min(item.stock, MAX_ITEM_QUANTITY)) {
       return {
         ok: false,
-        message: `Solo quedan ${item.stock} unidades de ${item.brand} ${item.model}.`,
+        message: `Puedes añadir un máximo de ${MAX_ITEM_QUANTITY} unidades de ${item.brand} ${item.model}.`,
       };
     }
     setItems((current) =>

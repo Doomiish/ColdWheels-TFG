@@ -8,7 +8,7 @@ import Brand from './Brand.jsx';
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { isAuthenticated, loading, signOut, user } = useAuth();
-  const { itemCount, openCart } = useCart();
+  const { itemCount } = useCart();
   const { notify } = useToast();
   const navigate = useNavigate();
   const closeMenu = () => setMenuOpen(false);
@@ -38,23 +38,32 @@ function Navbar() {
         </button>
         <div className={`collapse navbar-collapse${menuOpen ? ' show' : ''}`}>
           <div className="navbar-nav ms-auto align-items-lg-center gap-lg-2 pt-3 pt-lg-0">
+            <NavLink className="nav-link" to="/" onClick={closeMenu}>
+              Inicio
+            </NavLink>
             <NavLink className="nav-link" to="/products" onClick={closeMenu}>
               Catálogo
             </NavLink>
             <NavLink className="nav-link" to="/cart" onClick={closeMenu}>
-              Carrito ({itemCount})
+              <svg
+                className="navbar-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20.5 8H6"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <circle cx="10" cy="19" r="1.2" fill="currentColor" />
+                <circle cx="18" cy="19" r="1.2" fill="currentColor" />
+              </svg>
+              <span>Carrito ({itemCount})</span>
             </NavLink>
-            <button
-              className="btn btn-sm btn-light cart-open-button"
-              type="button"
-              aria-label="Abrir carrito lateral"
-              onClick={() => {
-                openCart();
-                closeMenu();
-              }}
-            >
-              Ver carrito
-            </button>
+
             {!loading && isAuthenticated ? (
               <>
                 <NavLink className="nav-link" to="/orders" onClick={closeMenu}>
@@ -85,7 +94,28 @@ function Navbar() {
                   to="/login"
                   onClick={closeMenu}
                 >
-                  Iniciar sesión
+                  <svg
+                    className="navbar-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <circle
+                      cx="12"
+                      cy="8"
+                      r="3.2"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                    />
+                    <path
+                      d="M5.5 20a6.5 6.5 0 0 1 13 0"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <span>Iniciar sesión</span>
                 </Link>
                 <Link
                   className="btn btn-primary btn-sm ms-lg-2"

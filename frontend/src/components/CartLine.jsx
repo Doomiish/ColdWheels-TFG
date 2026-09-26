@@ -45,7 +45,7 @@ function CartLine({ item, compact = false }) {
           <button
             type="button"
             aria-label={`Añadir una unidad de ${item.model}`}
-            disabled={item.quantity >= item.stock}
+            disabled={item.quantity >= Math.min(item.stock, 5)}
             onClick={() => updateQuantity(item.product_id, item.quantity + 1)}
           >
             +

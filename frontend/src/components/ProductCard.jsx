@@ -10,6 +10,11 @@ function ProductCard({ product }) {
   const { addItem, openCart } = useCart();
   const { notify } = useToast();
   const canBuy = product.available && product.stock > 0;
+  const stockLabel = !canBuy
+    ? 'Agotado'
+    : product.stock <= 3
+      ? 'Últimas unidades'
+      : 'Disponible';
 
   function handleAdd() {
     const result = addItem(product);
@@ -42,8 +47,16 @@ function ProductCard({ product }) {
               <small>ROAD / {product.year}</small>
             </div>
           )}
-          <span className={`stock-badge ${canBuy ? 'in-stock' : 'out-stock'}`}>
-            {canBuy ? 'Disponible' : 'Agotado'}
+          <span
+            className={`stock-badge ${
+              !canBuy
+                ? 'out-stock'
+                : product.stock <= 3
+                  ? 'low-stock'
+                  : 'in-stock'
+            }`}
+          >
+            {stockLabel}
           </span>
         </div>
       </Link>

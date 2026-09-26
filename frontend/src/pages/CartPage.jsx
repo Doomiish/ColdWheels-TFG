@@ -56,8 +56,8 @@ function CartPage() {
                 <strong>{formatPrice(estimatedTotal)}</strong>
               </div>
               <p className="small text-secondary">
-                El backend vuelve a validar precio, stock e impuestos al
-                confirmar la compra.
+                Los precios mostrados son orientativos. El importe final y la
+                disponibilidad se confirman al tramitar el pedido.
               </p>
               <Link className="btn btn-primary btn-lg w-100" to="/checkout">
                 Continuar al checkout

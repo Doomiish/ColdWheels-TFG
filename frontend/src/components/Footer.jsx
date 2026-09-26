@@ -1,11 +1,19 @@
-import Brand from './Brand.jsx';
-
 function Footer() {
   return (
     <footer className="site-footer">
-      <div className="container d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3">
-        <Brand light />
-        <p className="mb-0 footer-note">Preparados para el próximo tramo.</p>
+      <div className="site-footer-overlay" aria-hidden="true" />
+
+      <div className="container site-footer-content">
+        <div className="site-footer-brand">
+          <img
+            className="site-footer-emblem"
+            src="/img/brand/coldwheels-emblem.png"
+            alt="ColdWheels"
+          />
+
+          <p className="footer-note">Preparados para el próximo tramo.</p>
+        </div>
+
         <span className="footer-copyright">
           © {new Date().getFullYear()} ColdWheels
         </span>
