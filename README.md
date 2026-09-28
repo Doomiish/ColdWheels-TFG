@@ -179,4 +179,4 @@ La implementación incluye el catálogo, autenticación, carrito, checkout, gest
 
 ## Autor
 
-Agustín Mendez
+Agustín Mendez (https://github.com/Doomiish)
