@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../contexts/useAuth.js';
+import { getUserErrorMessage } from '../services/errorMessages.js';
 
 function LoginPage() {
   const { signIn } = useAuth();
@@ -21,7 +22,7 @@ function LoginPage() {
       await signIn({ email: email.trim(), password });
       navigate(destination, { replace: true });
     } catch (requestError) {
-      setError(requestError.message);
+      setError(getUserErrorMessage(requestError));
     } finally {
       setSubmitting(false);
     }

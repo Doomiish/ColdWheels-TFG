@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import useAuth from '../contexts/useAuth.js';
 import useToast from '../contexts/useToast.js';
+import { getUserErrorMessage } from '../services/errorMessages.js';
 
 function SettingsPage() {
   const { changeEmail, changePassword, user } = useAuth();
@@ -16,17 +17,15 @@ function SettingsPage() {
   const [emailState, setEmailState] = useState({
     loading: false,
     error: '',
-    success: '',
   });
   const [passwordState, setPasswordState] = useState({
     loading: false,
     error: '',
-    success: '',
   });
 
   async function submitEmail(event) {
     event.preventDefault();
-    setEmailState({ loading: true, error: '', success: '' });
+    setEmailState({ loading: true, error: '' });
     try {
       await changeEmail({
         ...emailForm,
@@ -36,20 +35,26 @@ function SettingsPage() {
       setEmailState({ loading: false, error: '' });
       notify('Email actualizado correctamente.');
     } catch (error) {
-      setEmailState({ loading: false, error: error.message, success: '' });
+      setEmailState({
+        loading: false,
+        error: getUserErrorMessage(error),
+      });
     }
   }
 
   async function submitPassword(event) {
     event.preventDefault();
-    setPasswordState({ loading: true, error: '', success: '' });
+    setPasswordState({ loading: true, error: '' });
     try {
       await changePassword(passwordForm);
       setPasswordForm({ current_password: '', new_password: '' });
       setPasswordState({ loading: false, error: '' });
       notify('Contraseña actualizada correctamente.');
     } catch (error) {
-      setPasswordState({ loading: false, error: error.message, success: '' });
+      setPasswordState({
+        loading: false,
+        error: getUserErrorMessage(error),
+      });
     }
   }
 

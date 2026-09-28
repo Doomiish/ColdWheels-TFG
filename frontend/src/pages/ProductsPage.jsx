@@ -4,6 +4,7 @@ import ProductCard from '../components/ProductCard.jsx';
 import StatusPanel from '../components/StatusPanel.jsx';
 import productCatalog from '../data/productCatalog.js';
 import { getProducts } from '../services/productService.js';
+import { getUserErrorMessage } from '../services/errorMessages.js';
 
 const categories = [
   'Todas',
@@ -29,7 +30,9 @@ function ProductsPage() {
     let active = true;
     getProducts()
       .then((items) => active && setProducts(items))
-      .catch((requestError) => active && setError(requestError.message))
+      .catch(
+        (requestError) => active && setError(getUserErrorMessage(requestError)),
+      )
       .finally(() => active && setLoading(false));
 
     return () => {

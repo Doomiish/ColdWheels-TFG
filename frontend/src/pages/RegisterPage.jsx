@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../contexts/useAuth.js';
+import { getUserErrorMessage } from '../services/errorMessages.js';
 
 function RegisterPage() {
   const { signUp } = useAuth();
@@ -31,7 +32,7 @@ function RegisterPage() {
         },
       });
     } catch (requestError) {
-      setError(requestError.message);
+      setError(getUserErrorMessage(requestError));
     } finally {
       setSubmitting(false);
     }

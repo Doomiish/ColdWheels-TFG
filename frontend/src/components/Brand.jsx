@@ -1,12 +1,8 @@
 import { Link } from 'react-router-dom';
 
-function Brand({ light = false }) {
+function Brand() {
   return (
-    <Link
-      className={`brand${light ? ' brand-light' : ''}`}
-      to="/"
-      aria-label="ColdWheels, inicio"
-    >
+    <Link className="brand" to="/" aria-label="ColdWheels, inicio">
       <img
         className="brand-logo"
         src="/img/brand/coldwheels-logo.png"

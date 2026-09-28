@@ -30,11 +30,14 @@ function CartPage() {
       </div>
       {items.length === 0 ? (
         <div className="cart-page-empty">
-          <div className="empty-wheel" aria-hidden="true">
-            ✳
-          </div>
+          <img
+            className="empty-monogram"
+            src="/img/brand/coldwheels-monogram.png"
+            alt=""
+            aria-hidden="true"
+          />
           <h2 className="h4">Tu carrito está vacío.</h2>
-          <p>Encuentra el equipo para tu próxima ruta.</p>
+          <p>Elige tu siguiente pieza de historia en miniatura.</p>
           <Link className="btn btn-primary" to="/products">
             Ver catálogo
           </Link>

@@ -4,6 +4,7 @@ import StatusPanel from '../components/StatusPanel.jsx';
 import useAuth from '../contexts/useAuth.js';
 import { formatDate, formatPrice } from '../services/formatters.js';
 import { getMySales } from '../services/salesService.js';
+import { getUserErrorMessage } from '../services/errorMessages.js';
 
 function OrdersPage() {
   const { accessToken } = useAuth();
@@ -16,7 +17,9 @@ function OrdersPage() {
     let active = true;
     getMySales(accessToken)
       .then((orders) => active && setSales(orders))
-      .catch((requestError) => active && setError(requestError.message))
+      .catch(
+        (requestError) => active && setError(getUserErrorMessage(requestError)),
+      )
       .finally(() => active && setLoading(false));
     return () => {
       active = false;
@@ -46,9 +49,12 @@ function OrdersPage() {
       )}
       {!loading && !error && sales.length === 0 && (
         <div className="orders-empty">
-          <span className="empty-wheel" aria-hidden="true">
-            ✳
-          </span>
+          <img
+            className="empty-monogram"
+            src="/img/brand/coldwheels-monogram.png"
+            alt=""
+            aria-hidden="true"
+          />
           <h2 className="h4">Aún no tienes pedidos.</h2>
           <p>Tu próximo recorrido empieza por aquí.</p>
           <Link className="btn btn-primary" to="/products">

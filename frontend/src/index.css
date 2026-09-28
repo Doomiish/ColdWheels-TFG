@@ -1102,9 +1102,11 @@ body {
   color: var(--cw-asphalt);
 }
 
-.empty-wheel {
-  color: var(--cw-olive);
-  font-size: 3rem;
+.empty-monogram {
+  display: block;
+  width: 6.5rem;
+  height: auto;
+  border-radius: 0.65rem;
 }
 
 .cart-summary {
@@ -1578,62 +1580,54 @@ body {
   align-items: center;
   background-color: var(--cw-asphalt);
   background-image: url('/img/footer/volkswagen-fox-mk1-footer.png');
-  background-position: center center;
-  background-size: 900px auto;
+  background-position: center 65%;
+  background-size: 100% auto;
   background-repeat: no-repeat;
 }
 
 .site-footer-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(28, 29, 27, 0.48);
+  background: rgba(28, 29, 27, 0.58);
 }
 
 .site-footer-content {
   position: relative;
   z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-}
-
-.site-footer-brand {
-  display: flex;
+  width: 100%;
+  padding: 0 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   gap: 1rem;
 }
 
 .site-footer-emblem {
   display: block;
-  width: 5.5rem;
+  justify-self: start;
+  width: 9.5rem;
   height: auto;
+  border-radius: 20%;
 }
 
 .footer-note,
 .footer-copyright {
   margin: 0;
   color: var(--cw-warm-white);
-  font-size: 0.82rem;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
 }
 
 .footer-note {
-  font-weight: 600;
+  justify-self: center;
+  font-size: 0.95rem;
+  font-weight: 750;
+  text-align: center;
 }
 
 .footer-copyright {
-  color: rgba(244, 241, 232, 0.72);
-}
-/* Responsive */
-
-@media (max-width: 1199.98px) {
-  .home-copy {
-    transform: none;
-  }
-
-  .site-footer {
-    background-size: cover;
-  }
+  justify-self: end;
+  font-size: 0.88rem;
+  font-weight: 700;
 }
 
 @media (max-width: 1199.98px) and (min-width: 992px) {
@@ -1736,11 +1730,6 @@ body {
     padding-bottom: 0;
     transform: none;
   }
-
-  .home-intro {
-    padding-top: 3.5rem !important;
-    padding-bottom: 4rem !important;
-  }
 }
 
 @media (max-width: 575.98px) {
@@ -1761,10 +1750,6 @@ body {
     min-height: 260px;
   }
 
-  .product-detail-image {
-    min-height: 260px;
-  }
-
   .toast-container {
     padding: 0.65rem !important;
   }
@@ -1779,12 +1764,23 @@ body {
     background-size: cover;
   }
 
+  .site-footer-content {
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .site-footer-emblem {
+    width: 6.5rem;
+  }
+
   .footer-note {
-    font-size: 0.72rem;
+    font-size: 0.68rem;
   }
 
   .footer-copyright {
-    display: none;
+    display: block;
+    font-size: 0.62rem;
   }
 
   .home-hero-inner {
